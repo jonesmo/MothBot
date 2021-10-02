@@ -1,4 +1,6 @@
-./tracerybot/node_modules/*
+./tracerybot/node_modules/
 .env
 .vscode/
 app.yaml
+node_modules/
+**/node_modules/
