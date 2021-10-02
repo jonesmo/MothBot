@@ -1,6 +1,7 @@
 require("dotenv").config();
 var tracery = require("tracery-grammar");
 var altGrammar = require("./alt_grammar.js");
+const cron = require("node-cron");
 
 var rawGrammar = {
   origin: [
@@ -98,8 +99,8 @@ var processedGrammar = tracery.createGrammar(altGrammar);
 
 processedGrammar.addModifiers(tracery.baseEngModifiers);
 
-var tweet = processedGrammar.flatten("#phrase#");
-console.log(tweet);
+const grammars = ["#phrase#", "#phrase2#", "#phrase3#", "#phrase4#"];
+let toFlatten = grammars[Math.floor(Math.random() * grammars.length)];
 
 var Twit = require("twit");
 
@@ -110,6 +111,20 @@ var T = new Twit({
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
 });
 
-T.post("statuses/update", { status: tweet }, function (err, data, response) {
-  //   console.log(data);
+// for one tweet
+
+var tweet = processedGrammar.flatten(toFlatten);
+console.log(tweet);
+
+T.post("statuses/update", { status: tweet }, function (err, data, response) {});
+
+// for a regular cron job
+cron.schedule("*/20 * * * *", () => {
+  var tweet = processedGrammar.flatten(toFlatten);
+  console.log(tweet);
+  T.post(
+    "statuses/update",
+    { status: tweet },
+    function (err, data, response) {}
+  );
 });

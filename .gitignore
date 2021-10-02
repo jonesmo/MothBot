@@ -1,0 +1,4 @@
+./tracerybot/node_modules/*
+.env
+.vscode/
+app.yaml
