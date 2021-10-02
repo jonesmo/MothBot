@@ -1,4 +1,4 @@
-#MothBot, a poetry Twitterbot
+# MothBot, a poetry Twitterbot
 
 Based on [Cheap Bots, Done Quick!](http://cheapbotsdonequick.com/) and [Tracery](https://github.com/v21/tracerybot) by Dr. Kate Compton
 
